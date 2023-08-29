@@ -1,0 +1,38 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Timestamp</th>
+        <th scope="col">Name</th>
+        <th scope="col">ID</th>
+        <th scope="col">Expand</th>
+      </tr>
+    </thead>
+    <tbody class="accordion" id="">
+        {% for index, entry in queue %}
+        <div class="accordion-item">
+        <tr>
+            <th scope="row">{{ index }}</th>
+            <td>{{ entry.timestamp }}</td>
+            <td>{{ entry.name }}</td>
+            <td>
+                <a href="/results?id={{ entry._id }}">{{ entry._id }}</a>
+                <a href="/results?id={{ entry._id }}"><i class="bi bi-box-arrow-up-right" style="text-decoration: none;"></i></a>
+            </td>
+            <td data-bs-toggle="collapse" data-bs-target="#collapse-{{ index }}" aria-expanded="false" aria-controls="collapse-{{ index }}"><i class="bi bi-chevron-down"></i></td>
+        </tr>
+        <tr id="collapse-{{ index }}" class="collapse show" style="transition: 0.0s;" data-bs-parent="#queueAccordion">
+            <td></td>
+            <td colspan="3">
+                <p>
+                    Summary: {{ entry.summary }}
+                </p>
+            </td>
+            <td colspan="3">
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+        </div>
+        {% endfor %}
+    </tbody>
+  </table>
